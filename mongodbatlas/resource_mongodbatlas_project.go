@@ -7,6 +7,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	matlas "go.mongodb.org/atlas/mongodbatlas"
 )
 
@@ -44,6 +45,12 @@ func resourceMongoDBAtlasProject() *schema.Resource {
 			"created": {
 				Type:     schema.TypeString,
 				Computed: true,
+			},
+			"region_usage_restrictions": {
+				Type:         schema.TypeString,
+				Description:  "Only use if you set mongodbgov true",
+				ValidateFunc: validation.StringInSlice([]string{"GOV_REGIONS_ONLY", "COMMERCIAL_FEDRAMP_REGIONS_ONLY", "NONE"}, false),
+				Optional:     true,
 			},
 			"teams": {
 				Type:     schema.TypeSet,
@@ -87,6 +94,10 @@ func resourceMongoDBAtlasProjectCreate(ctx context.Context, d *schema.ResourceDa
 		createProjectOptions = &matlas.CreateProjectOptions{
 			ProjectOwnerID: projectOwnerID.(string),
 		}
+	}
+
+	if v, ok := d.GetOk("region_usage_restrictions"); ok {
+		projectReq.RegionUsageRestrictions = v.(string)
 	}
 
 	project, _, err := conn.Projects.Create(ctx, projectReq, createProjectOptions)
