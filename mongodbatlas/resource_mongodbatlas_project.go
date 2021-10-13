@@ -48,7 +48,7 @@ func resourceMongoDBAtlasProject() *schema.Resource {
 			},
 			"region_usage_restrictions": {
 				Type:         schema.TypeString,
-				Description:  "Only use if you set mongodbgov true",
+				Description:  "Use it only if you set mongodbgov true",
 				ValidateFunc: validation.StringInSlice([]string{"GOV_REGIONS_ONLY", "COMMERCIAL_FEDRAMP_REGIONS_ONLY", "NONE"}, false),
 				Optional:     true,
 			},
