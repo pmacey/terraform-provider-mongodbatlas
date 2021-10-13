@@ -149,7 +149,7 @@ func Provider() *schema.Provider {
 }
 
 func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}, diag.Diagnostics) {
-	const baseURLMongoGov = "https://cloud.mongodbgov.com"
+	const baseURLMongoGov = "https://cloud.mongodbgov.com/"
 
 	config := Config{
 		PublicKey:    d.Get("public_key").(string),
