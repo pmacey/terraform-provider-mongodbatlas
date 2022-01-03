@@ -81,13 +81,19 @@ In addition to all arguments above, the following attributes are exported:
 * `container_id` - The Network Peering Container ID.
 * `id` - Terraform's unique identifier used internally for state management.
 * `provisioned` - Indicates whether the project has Network Peering connections deployed in the container.
+
 **AWS ONLY:** 
+
 * `region_name` - Atlas name for AWS region where the Atlas container resides.
 * `vpc_id` - Unique identifier of Atlas' AWS VPC.
+
 **CGP ONLY:**
+
 * `gcp_project_id` - Unique identifier of the GCP project in which the network peer resides. Returns null. This value is populated once you create a new network peering connection with the network peering resource.
 * `network_name` - Unique identifier of the Network Peering connection in the Atlas project. Returns null. This value is populated once you create a new network peering connection with the network peering resource.
+
 **AZURE ONLY:**
+
 * `region` - Azure region where the Atlas container resides.
 * `azure_subscription_id` - Unique identifier of the Azure subscription in which the VNet resides.
 * * `vnet_name` - 	The name of the Azure VNet. Returns null. This value is populated once you create a new network peering connection with the network peering resource.
